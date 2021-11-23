@@ -4,7 +4,7 @@
 #
 Name     : pytz-deprecation-shim
 Version  : 0.1.0.post0
-Release  : 5
+Release  : 6
 URL      : https://files.pythonhosted.org/packages/94/f0/909f94fea74759654390a3e1a9e4e185b6cd9aa810e533e3586f39da3097/pytz_deprecation_shim-0.1.0.post0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/94/f0/909f94fea74759654390a3e1a9e4e185b6cd9aa810e533e3586f39da3097/pytz_deprecation_shim-0.1.0.post0.tar.gz
 Summary  : Shims to make deprecation of pytz easier
@@ -13,18 +13,14 @@ License  : Apache-2.0
 Requires: pytz-deprecation-shim-license = %{version}-%{release}
 Requires: pytz-deprecation-shim-python = %{version}-%{release}
 Requires: pytz-deprecation-shim-python3 = %{version}-%{release}
-Requires: python-dateutil
-Requires: tzdata
 BuildRequires : buildreq-distutils3
 BuildRequires : pluggy
 BuildRequires : py-python
+BuildRequires : pypi(setuptools)
+BuildRequires : pypi(wheel)
 BuildRequires : pytest
-BuildRequires : python-dateutil
-BuildRequires : setuptools
 BuildRequires : tox
-BuildRequires : tzdata
 BuildRequires : virtualenv
-BuildRequires : wheel
 
 %description
 ===========================================================
@@ -70,7 +66,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1636566577
+export SOURCE_DATE_EPOCH=1637686620
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -88,7 +84,7 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pytz-deprecation-shim
 cp %{_builddir}/pytz_deprecation_shim-0.1.0.post0/LICENSE %{buildroot}/usr/share/package-licenses/pytz-deprecation-shim/a17821d024ce62859b8750020c3b7cbb2e6a57af
 cp %{_builddir}/pytz_deprecation_shim-0.1.0.post0/licenses/LICENSE_APACHE %{buildroot}/usr/share/package-licenses/pytz-deprecation-shim/7df059597099bb7dcf25d2a9aedfaf4465f72d8d
-python3 -m install --destdir=%{buildroot} dist/*.whl
+pip install --root=%{buildroot} --no-deps dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
